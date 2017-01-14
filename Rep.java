@@ -22,6 +22,8 @@ public abstract class Rep {
             "cela", "cla", "d'ailleurs", "dedans", "entre", "être", 
             "falloir", "là", "même", 
             "pour", "par", "tous", "un"
+            //new
+            , "voir"
     ));
 
     Tokenizer tokenizer;
