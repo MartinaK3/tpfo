@@ -52,11 +52,10 @@ public class Rep_TCFL_BOW3G extends Rep {
             // BOW : sac-de-mots
             setFeature(token, 1, vector);
             // 2G: bi-grammes
-            /*
             String bigram = getNgram(2, tokens, i);
             if (bigram!=null) {
                 setFeature(bigram, 1, vector);
-            }*/
+            }
            //3G 
             String trigram = getNgram(3, tokens, i);
             if (trigram!=null) {
