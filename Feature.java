@@ -5,6 +5,14 @@
  */
 package tpfo;
 
+import de.linguatools.disco.CorruptConfigFileException;
+import de.linguatools.disco.DISCO;
+import de.linguatools.disco.ReturnDataBN;
+import de.linguatools.disco.ReturnDataCol;
+import de.linguatools.disco.WrongWordspaceTypeException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  *
  * @author Salah Ait-Mokhtar 
@@ -16,6 +24,7 @@ public class Feature implements Comparable<Feature> {
     private int index;
     // fréquence du trait (nombre de fois observé dans les données)
     private int count = 0;
+    private float weight = 0;
     // Est-ce que la sélection de ce trait dépend de sa fréquence?
     private boolean isFrequencyBased;
 
@@ -23,6 +32,7 @@ public class Feature implements Comparable<Feature> {
         this.name = name;
         this.index = index;
         this.count = 0;
+        this.weight=0;
     }
 
     
@@ -45,6 +55,29 @@ public class Feature implements Comparable<Feature> {
 
     public int getCount() {
         return count;
+    }
+    
+    public float getWeightedCount(DISCO disco) {
+        float simpos;
+        float simneg;
+        try{
+         simpos = disco.semanticSimilarity("bon", this.name,
+                DISCO.SimilarityMeasure.COSINE);}
+        catch(IOException | IllegalArgumentException | NullPointerException ex){
+            System.out.println("Error: " + ex);
+            return 0;
+        }
+        try{
+         simneg = disco.semanticSimilarity("mauvais", this.name,
+                DISCO.SimilarityMeasure.COSINE);}
+        catch(IOException | IllegalArgumentException | NullPointerException ex){
+            System.out.println("Error: " + ex);
+            return 0;
+        }
+        weight = simpos-simneg;
+        float fcount = (float) count;
+        float weightedcount = 10*weight*fcount;
+        return weightedcount;
     }
 
     public void setCount(int count) {

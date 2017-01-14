@@ -5,6 +5,9 @@
  */
 package tpfo;
 
+import de.linguatools.disco.CorruptConfigFileException;
+import de.linguatools.disco.DISCO;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.nio.file.Path;
@@ -35,6 +38,32 @@ public class FT {
      */
     public static void main(String[] args) throws IOException {
         // 
+        String discoDir;
+//        discoDir = args[0];
+//discoDir = "C:/Data/Lexical/FR/fr-general-20151126-lm-word2vec-sim";
+        discoDir = "./resources/fr-general-20151126-lm-word2vec-sim";
+        // second argument is the input word
+        String word;
+//        word = args[1];
+        word = "restaurant";
+
+        /**
+         * **************************************
+         * create instance of class DISCO. * Do NOT load the word space into
+         * RAM. *
+	 ***************************************
+         */
+        DISCO disco;
+        try {
+            disco = new DISCO(discoDir, false);
+        } catch (FileNotFoundException | CorruptConfigFileException ex) {
+            System.out.println("Error creating DISCO instance: " + ex);
+            return;
+        }
+
+        
+        
+        
         String lexPathname = "./resources/lefff-3.4.mlex";
         String corpusPathname = "./corpus/corpus.all20";
         if (args.length == 2) {
@@ -54,7 +83,7 @@ public class FT {
 
         // Créer une représentation
        // Rep rep = new Rep_TCF_BOW2G(tokenizer, lex, 50, 5);
-       Rep rep = new Rep_TCFL_BOW(tokenizer, lex, 700, 50);
+       Rep rep = new Rep_TCFL_BOW3G_disco(tokenizer, lex, 700, 25, disco);
        //Rep rep = new Rep_TCF_BOW2G(tokenizer, lex, 700, 50);
         // initialiser la représentation (l'ensemble de ses traits)
         rep.initializeFeatures(dataset);

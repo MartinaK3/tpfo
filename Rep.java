@@ -8,6 +8,7 @@ package tpfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import de.linguatools.disco.DISCO;
 
 /**
  *
@@ -23,7 +24,7 @@ public abstract class Rep {
             "falloir", "là", "même", 
             "pour", "par", "tous", "un"
             //new
-            , "voir"
+            //, "très"
     ));
 
     Tokenizer tokenizer;
@@ -36,6 +37,7 @@ public abstract class Rep {
     //
     protected int maxSize;
     protected int minCount;
+    protected DISCO disco;
 
     // Méthodes abstraites à implémenter par les sous-classes possibles
     // Initialisation (définition) de l'ensemble des traits
@@ -48,12 +50,13 @@ public abstract class Rep {
     public abstract int getDimension();
 
     //
-    public Rep(Tokenizer tokenizer, Lexicon lex, int maxSize, int minCount) {
+    public Rep(Tokenizer tokenizer, Lexicon lex, int maxSize, int minCount, DISCO disco) {
         this.maxSize = maxSize;
         this.minCount = minCount;
         this.tokenizer = tokenizer;
         this.lex = lex;
         this.fset = new FeatureSet();
+        this.disco = disco;
     }
 
     /**

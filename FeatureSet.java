@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.linguatools.disco.DISCO;
+
 /**
  *
  * @author Salah Ait-Mokhtar
@@ -106,6 +108,20 @@ public class FeatureSet {
         int i = 0;
         while (i < featureList.size()) {
             if (featureList.get(i).getCount() < minCount) {
+                // ce trait n'a pas assez d'occurrences pour être gardé
+                map.remove(featureList.get(i).getName());
+                featureList.remove(i);
+            } else {
+                i++;
+            }
+        }
+        this.sort();
+    }
+    
+    public void selectByWeightedCount(int minCount, DISCO disco) {
+        int i = 0;
+        while (i < featureList.size()) {
+            if (featureList.get(i).getWeightedCount(disco) < minCount) {
                 // ce trait n'a pas assez d'occurrences pour être gardé
                 map.remove(featureList.get(i).getName());
                 featureList.remove(i);
