@@ -82,7 +82,7 @@ public class FT {
         Dataset testset = dataset.split(0.80f);
 
         // Créer une représentation
-        Rep rep = new Rep_TCFL_BOW(tokenizer, lex, 250, 50);
+        Rep rep = new Rep_TCFL_BOW(tokenizer, lex, 700, 50);
       // Rep rep = new Rep_TCFL_BOW_disco(tokenizer, lex, 700, 30, disco);
         // initialiser la représentation (l'ensemble de ses traits)
         rep.initializeFeatures(dataset);
