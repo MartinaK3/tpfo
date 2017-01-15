@@ -24,7 +24,7 @@ public abstract class Rep {
             "falloir", "là", "même", 
             "pour", "par", "tous", "un"
             //new
-            //, "très"
+            //, "donc"
     ));
 
     Tokenizer tokenizer;

@@ -18,9 +18,9 @@ import de.linguatools.disco.DISCO;
  * 
  * @author Fatima
  */
-public class Rep_TCFL_BOW3G_disco extends Rep {
+public class Rep_TCFL_BOW2G_disco extends Rep {
     
-    public Rep_TCFL_BOW3G_disco( Tokenizer tokenizer, Lexicon lex,
+    public Rep_TCFL_BOW2G_disco( Tokenizer tokenizer, Lexicon lex,
             int maxSize, int minCount, DISCO disco
            ) {
         super(tokenizer, lex, maxSize, minCount, disco);
@@ -58,11 +58,7 @@ public class Rep_TCFL_BOW3G_disco extends Rep {
             if (bigram!=null) {
                 setFeature(bigram, 1, vector);
             }
-           //3G 
-            String trigram = getNgram(3, tokens, i);
-            if (trigram!=null) {
-                setFeature(trigram, 1, vector);
-            }
+          
         }
         return vector;
     }

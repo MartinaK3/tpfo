@@ -58,21 +58,66 @@ public class Feature implements Comparable<Feature> {
     }
     
     public float getWeightedCount(DISCO disco) {
-        float simpos;
-        float simneg;
-        try{
-         simpos = disco.semanticSimilarity("bon", this.name,
+        float simpos; float simpos2;
+        float simneg; float simneg2;
+        String word; String word2 = "";
+        boolean bigram = false;
+        if(this.name.contains("_")){
+           String parts[] = this.name.split("\\_");
+           word=parts[0];
+           word2=parts[1];
+           bigram=true;
+        }
+        else{
+            word=this.name;
+        }
+        if (bigram){
+            try{
+         simpos = disco.semanticSimilarity("bon", word,
                 DISCO.SimilarityMeasure.COSINE);}
         catch(IOException | IllegalArgumentException | NullPointerException ex){
             System.out.println("Error: " + ex);
             return 0;
         }
         try{
-         simneg = disco.semanticSimilarity("mauvais", this.name,
+         simneg = disco.semanticSimilarity("mauvais", word,
                 DISCO.SimilarityMeasure.COSINE);}
         catch(IOException | IllegalArgumentException | NullPointerException ex){
             System.out.println("Error: " + ex);
             return 0;
+        }
+        try{
+         simpos2 = disco.semanticSimilarity("bon", word2,
+                DISCO.SimilarityMeasure.COSINE);}
+        catch(IOException | IllegalArgumentException | NullPointerException ex){
+            System.out.println("Error: " + ex);
+            return 0;
+        }
+        try{
+         simneg2 = disco.semanticSimilarity("mauvais", word2,
+                DISCO.SimilarityMeasure.COSINE);}
+        catch(IOException | IllegalArgumentException | NullPointerException ex){
+            System.out.println("Error: " + ex);
+            return 0;
+        }
+        simpos=(simpos+simpos2)/2;
+        simneg=(simneg+simneg2)/2;
+        }
+        else{
+        try{
+         simpos = disco.semanticSimilarity("bon", word,
+                DISCO.SimilarityMeasure.COSINE);}
+        catch(IOException | IllegalArgumentException | NullPointerException ex){
+            System.out.println("Error: " + ex);
+            return 0;
+        }
+        try{
+         simneg = disco.semanticSimilarity("mauvais", word,
+                DISCO.SimilarityMeasure.COSINE);}
+        catch(IOException | IllegalArgumentException | NullPointerException ex){
+            System.out.println("Error: " + ex);
+            return 0;
+        }
         }
         weight = simpos-simneg;
         float fcount = (float) count;
