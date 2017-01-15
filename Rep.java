@@ -24,7 +24,7 @@ public abstract class Rep {
             "falloir", "là", "même", 
             "pour", "par", "tous", "un"
             //new
-            //, "donc"
+            , "table"
     ));
 
     Tokenizer tokenizer;
@@ -50,13 +50,14 @@ public abstract class Rep {
     public abstract int getDimension();
 
     //
-    public Rep(Tokenizer tokenizer, Lexicon lex, int maxSize, int minCount, DISCO disco) {
+    //public Rep(Tokenizer tokenizer, Lexicon lex, int maxSize, int minCount, DISCO disco) {
+    public Rep(Tokenizer tokenizer, Lexicon lex, int maxSize, int minCount) {
         this.maxSize = maxSize;
         this.minCount = minCount;
         this.tokenizer = tokenizer;
         this.lex = lex;
         this.fset = new FeatureSet();
-        this.disco = disco;
+      //  this.disco = disco;
     }
 
     /**
