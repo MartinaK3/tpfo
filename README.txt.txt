@@ -8,6 +8,7 @@ Nous avons 15 itérations pour ce modèle.
 Représentation:
 La taille de notre représentation est de 700, avec un seuil de fréquence égal à 50 ; 
 comme trait nous avons le filtrage, la normalisation, la lemmatisation et le BOW.
+Nous avons également rajouter "table" dans les mots à ignorer (c'est le seul qui donnait une amélioration parmi tous ceux essayés.)
 Nous avons essayé d’améliorer nos résultats en essayant les N-grammes (2G et 3G) et en rajoutant des mesures de similarité de disco. 
 (Le disco on a essayé pour mettre des poids sur les frequences. Ce poid depend de la similarité d'un mot aux mots "bien" et "mauvais", si c'est
 un mot très positif ou un mot très negatif, le poids augmente.)
